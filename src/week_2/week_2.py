@@ -67,11 +67,9 @@ def exercise_7_1(_cities, _ocity,_ncity):
         i += 1
     return (_cities)
 
-
 print ("Exercise 1")
 print ("============")
 exercise_1(1,9)
-
 
 print ("Exercise 2")
 print ("============")
@@ -94,7 +92,6 @@ print ("\nExercise 4.1")
 print ("============")
 exercise_4()
 exercise_4_1()
-
 
 print ("\nExercise 7")
 print ("============\n")
