@@ -106,7 +106,18 @@ def flatlandSpaceStations2(n,c):
     first_scity_pos = 0
     last_scity_pos = scity_len-1
 
-    if (scity_len == n):
+
+    #find biggest distanced cities
+    max_distance = 0
+
+    for i,scity in enumerate(c):
+        if i+1!=scity_len:
+            distance = abs(c[i] - c[i+1])
+            if distance > max_distance:
+                max_distance = distance
+
+
+    if scity_len == n:
         return 0
     if n % 2 != 0:
         median_low_city= int((last_city + first_city)/2)
@@ -116,7 +127,7 @@ def flatlandSpaceStations2(n,c):
         median_high_city = median_low_city + 1
 
 
-    if (scity_len) % 2 != 0:
+    if max_distance%2 != 0:
         median_low_scity_pos = int((last_scity_pos + first_scity_pos) / 2)
         median_high_scity_pos = median_low_scity_pos
     else:
@@ -129,7 +140,7 @@ def flatlandSpaceStations2(n,c):
     max_d.append(abs(last_city-c[scity_len-1]))
 
     #median to first and last space stations
-    for scity in c
+
 
     max_d.append(abs(median_high_city - c[median_high_scity_pos]))
     max_d.append(abs(median_high_city - c[median_low_scity_pos]))
@@ -148,5 +159,112 @@ def flatlandSpaceStations2(n,c):
 
 #staircase(6)
 
-print(flatlandSpaceStations2(100,[93,41,91,61,30,6,25,90,97]))
+#print(flatlandSpaceStations2(100,[93,41,91,61,30,6,25,90,97]))
 #help(map)
+
+# Complete the fairRations function below.
+def isOdd(n):
+    if int(n)%2 != 0:
+        return True
+    return False
+
+def fairRations(B):
+
+    bread_count = 0
+    all_evens = False
+    not_found = False
+    while not_found == False and all_evens == False:
+        for index, val in enumerate(B):
+            if (index+1 < len(B)):
+                if isOdd(B[index]):
+                    B[index] = val+1
+                    B[index+1] = B[index+1]+1
+                    bread_count += 2
+                    if isOdd(B[index+1]) == False:
+                        all_evens = True
+                else:
+                    all_evens = True
+            else:
+                #
+                if isOdd(B[index]):
+                    not_found =  True
+                    all_evens = False
+                else:
+                    all_evens = True
+            index += 1
+
+    if not_found:
+        return "NO"
+    else:
+        return bread_count
+
+
+#calling
+#fairRations([2,3,4,5,6])
+
+# Complete the cavityMap function below.
+def cavityMap(grid):
+
+    _breadth = _depth =  len(grid)
+    cavity_grid = []
+    new_grid_row = []
+    for m,row in enumerate(grid):
+        if m != 0 and m != _breadth - 1:  # non border row
+            for n, element in enumerate(row):
+                if n != 0 and n != _depth - 1: # non border column.
+                    if element > grid[m-1][n] \
+                        and element > grid[m+1][n] \
+                        and element > grid[m][n-1] \
+                        and element > grid[m][n+1]:
+
+                        #
+                        new_grid_row.append('X')
+                    else:
+                        new_grid_row.append(grid[m][n])
+                else:
+                    new_grid_row.append(grid[m][n])
+        else:
+            for element in grid[m]:
+                new_grid_row.append(element)
+        cavity_grid.append(''.join(e for e in new_grid_row))
+        new_grid_row = []
+
+    return cavity_grid
+
+## Run
+# grid = ['989','198','111']
+#
+# for row in grid:
+#     print (row)
+# new_grid = cavityMap(grid)
+# for row in new_grid:
+#     print (row)
+#
+# grid = ['1112',
+#         '1912',
+#         '1892',
+#         '1234'
+#         ]
+#
+# for row in grid:
+#     print (row)
+# new_grid = cavityMap(grid)
+# for row in new_grid:
+#     print (row)
+
+# Complete the stones function below.
+def stones(n, a, b):
+
+    stone_1 = 0
+    stone_position = []
+
+    stone_matrix = [][]
+    for count in pow(2,n-1):
+        # position 1
+        for k in [a,b]:
+            stone_matrix[count][]
+            for j in range (a,b):
+                for k in range(0,2):
+
+
+
