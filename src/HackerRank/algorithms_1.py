@@ -327,7 +327,7 @@ def unWrapped(matrix):
             begin = i+j
         count += 1
 
-    print (layers)
+    #print (layers)
     return layers
 
 
@@ -336,7 +336,7 @@ def changePosition(array, pos):
     pos = pos%len(array)
     array = array[pos:] + array[:pos]
 
-    print(array)
+    #print(array)
     return array
 
 def wrapped(layers,matrix):
@@ -397,7 +397,7 @@ def wrapped(layers,matrix):
         count += 1
         index += 1
 
-    print (matrix)
+    #print (matrix)
     return matrix
 
 # Complete the matrixRotation function below.
@@ -409,7 +409,7 @@ def matrixRotation(matrix, r):
 
     matrix = wrapped(layers,matrix)
 
-
+    print('\n'.join([''.join(['{:<1} '.format(item) for item in row]) for row in matrix]))
 
 if __name__ == "__main__":
 #
