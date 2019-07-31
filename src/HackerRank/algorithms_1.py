@@ -252,19 +252,165 @@ def cavityMap(grid):
 # for row in new_grid:
 #     print (row)
 
-# Complete the stones function below.
-def stones(n, a, b):
-
-    stone_1 = 0
-    stone_position = []
-
-    stone_matrix = [][]
-    for count in pow(2,n-1):
-        # position 1
-        for k in [a,b]:
-            stone_matrix[count][]
-            for j in range (a,b):
-                for k in range(0,2):
+# #
 
 
+def gradingStudents(grades):
+    # Write your code here
 
+    rounded_grades = []
+
+    for index,grade in enumerate(grades):
+        if grade < 38:
+            rounded_grades.append(grade)
+        else:
+            lower_diff = grade % 5
+            if lower_diff == 0:
+                rounded_grades.append(grade)
+            elif 5 - lower_diff < 3:
+                rounded_grades.append(grade+5-lower_diff)
+            else:
+                rounded_grades.append(grade)
+
+    return rounded_grades
+
+
+#print(gradingStudents([93,41,91,64,38,6,25,93,98]))
+
+def unWrapped(matrix):
+
+    m = len(matrix)
+    n = len(matrix[0])
+    total_elements = m*n
+    count = 0
+    layers = []
+    unwrapped = []
+    TOP_ROW = 0
+    BOTTOM_ROW = m-1
+    LEFT_COLUMN = 0
+    RIGHT_COLUMN = n-1
+    i = 0
+    j = 0
+
+    begin = i+j
+    while count < total_elements:
+
+        unwrapped.append(matrix[i][j])
+        if i == BOTTOM_ROW:
+            if j != LEFT_COLUMN:
+                j = j - 1
+            elif i != TOP_ROW:
+                i = i - 1
+            elif j != RIGHT_COLUMN:
+                j += 1
+        elif j == LEFT_COLUMN:
+            if i != TOP_ROW:
+                i = i - 1
+            elif j != RIGHT_COLUMN:
+                j = j+1
+            elif i != BOTTOM_ROW:
+                i += 1
+        elif j == RIGHT_COLUMN:
+            i = i + 1
+        else:
+            j = j+1
+
+        if i == j and begin == i+j:
+            layers.append(unwrapped)
+            i += 1
+            j += 1
+            BOTTOM_ROW -= 1
+            TOP_ROW  += 1
+            LEFT_COLUMN += 1
+            RIGHT_COLUMN -= 1
+            unwrapped = []
+            begin = i+j
+        count += 1
+
+    print (layers)
+    return layers
+
+
+def changePosition(array, pos):
+
+    pos = pos%len(array)
+    array = array[pos:] + array[:pos]
+
+    print(array)
+    return array
+
+def wrapped(layers,matrix):
+#
+
+
+    m = len(matrix)
+    n = len(matrix[0])
+    total_elements = m*n
+    count = 0
+    TOP_ROW = 0
+    BOTTOM_ROW = m-1
+    LEFT_COLUMN = 0
+    RIGHT_COLUMN = n-1
+    i = 0
+    j = 0
+    index = 1
+
+    begin = i+j
+    layers.reverse()
+    layer = layers.pop()
+
+    while count < total_elements:
+
+        matrix[i][j] = layer[index-1]
+
+        if i == BOTTOM_ROW:
+            if j != LEFT_COLUMN:
+                j = j - 1
+            elif i != TOP_ROW:
+                i = i - 1
+            elif j != RIGHT_COLUMN:
+                j += 1
+        elif j == LEFT_COLUMN:
+            if i != TOP_ROW:
+                i = i - 1
+            elif j != RIGHT_COLUMN:
+                j = j+1
+            elif i != BOTTOM_ROW:
+                i += 1
+        elif j == RIGHT_COLUMN:
+            i = i + 1
+        else:
+            j = j+1
+
+        if i == j and begin == i+j:
+            i += 1
+            j += 1
+            BOTTOM_ROW -= 1
+            TOP_ROW  += 1
+            LEFT_COLUMN += 1
+            RIGHT_COLUMN -= 1
+            if len(layers) != 0:
+                layer = layers.pop()
+            begin = i+j
+            index = 0
+
+        count += 1
+        index += 1
+
+    print (matrix)
+    return matrix
+
+# Complete the matrixRotation function below.
+def matrixRotation(matrix, r):
+#
+    layers = unWrapped(matrix)
+    for index,layer in enumerate(layers):
+        layers[index] = changePosition(layer,r)
+
+    matrix = wrapped(layers,matrix)
+
+
+
+if __name__ == "__main__":
+#
+    matrixRotation([[11,12,13,14,15,16],[21,22,23,24,25,26],[31,32,33,34,35,36],[41,42,43,44,45,46],[51,52,53,54,55,56]],7)

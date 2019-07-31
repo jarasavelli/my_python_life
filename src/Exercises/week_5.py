@@ -170,5 +170,6 @@ start_time = time.time()
 print (factorialByLoop(9998))
 print (time.time() - start_time)
 
-import week_4
-print(week_4.flatlandSpaceStations(5,[0,4]))
+from src.HackerRank import algorithms_1
+
+print(algorithms_1.flatlandSpaceStations(5, [0, 4]))
